@@ -1,10 +1,12 @@
 package org.ivan.CloudStorage.service;
 
+import org.ivan.CloudStorage.exception.FileNotFoundException;
 import org.ivan.CloudStorage.model.File;
 import org.ivan.CloudStorage.model.User;
 import org.ivan.CloudStorage.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -23,6 +25,7 @@ public class FileService {
         return fileRepository.findByUser(user);
     }
 
+    @Transactional
     public File uploadFile(User user, String filename, String filePath, Long size) {
         File file = new File();
         file.setUser(user);
@@ -32,8 +35,9 @@ public class FileService {
         return fileRepository.save(file);
     }
 
+    @Transactional
     public void deleteFile(User user, String filename) {
-        File file = fileRepository.findByFilenameAndUser(filename, user).orElseThrow(() -> new RuntimeException("File not found"));
+        File file = fileRepository.findByFilenameAndUser(filename, user).orElseThrow(() -> new FileNotFoundException("File not found"));
         fileRepository.delete(file);
     }
 

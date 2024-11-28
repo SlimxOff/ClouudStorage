@@ -1,3 +1,12 @@
-#version: '3.8'
-#services:
-#  backend:
+version: '3.8'
+services:
+  backend:
+    image: your-docker-image
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=password
+    volumes:
+      - ./logs:/logs
