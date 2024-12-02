@@ -1,8 +1,7 @@
-package org.ivan.CloudStorage.service;
-
 import org.ivan.CloudStorage.model.File;
 import org.ivan.CloudStorage.model.User;
 import org.ivan.CloudStorage.repository.FileRepository;
+import org.ivan.CloudStorage.service.FileService;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
